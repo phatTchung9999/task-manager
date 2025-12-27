@@ -1,0 +1,24 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>{{ title }}</title> 
+    </head> 
+    <body> 
+        <h1>What would you like to do today?</h1> 
+        <p>You would like to adjust the staff:
+        <a href="{{ url_for('staffs') }}">
+        <button type="button">Staffs</button>
+        </a>
+        </p> 
+        <p>You would like to adjust the task:
+        <a href="{{ url_for('tasks') }}">
+        <button type="button">Tasks</button>
+        </a>
+        </p>
+        <p>You would like to check the table of tasks:
+        <a href="{{ url_for('table') }}">
+        <button type="button">Check</button>
+        </a>
+        </p>  
+    </body> 
+</html>

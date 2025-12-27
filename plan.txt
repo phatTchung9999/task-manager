@@ -1,0 +1,9 @@
+- Homepage .done
+-> login (only manager with correct username and password can access) .half way done
+-> navigating page (where you can choose if u wanna adjust staffs or tasks) .done
+-> adjust staffs or tasks 
+        -> add
+        -> update
+        -> delete
+-> notification that you have done what you want , if you wanna check the table .done
+-> page to check the table (where you can mark some tasks as done)

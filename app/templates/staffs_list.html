@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Staff List</title>
+    </head>
+
+    <body>
+        <h1>All the staffs doing tasks listed here:</h1>
+        <ul>
+            {%for staff in staffs%}
+            <p>
+                {{staff.id}} - {{staff.staffname}}  
+            </p>
+            {%endfor%}
+        </ul>
+        
+    </body>
+</html>

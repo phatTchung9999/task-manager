@@ -1,0 +1,25 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>{{ title }}</title> 
+    </head> 
+    <body> 
+        <h1>Hello There, This is the application to manage task!</h1> 
+                    <h1>Please login to use!</h1> 
+            <form method="post" action="{{ url_for('do_the_login') }}">
+
+                <div class="form-row">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+
+                <div class="form-row">
+                    <label for="password">Password:</label>
+                    <input type="text" id="password" name="password">
+                </div>
+
+                <input type="submit" value="Submit">
+            </form>
+
+    </body> 
+</html>
