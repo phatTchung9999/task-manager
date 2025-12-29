@@ -3,7 +3,7 @@ from app.models import Staff, Task, Manager
 
 
 from flask import render_template
-from flask import request, url_for, redirect
+from flask import request, url_for, redirect, flash
 from sqlalchemy.exc import IntegrityError
 
 @app.route('/')
@@ -25,12 +25,59 @@ def home_page_again():
 
 
 @app.route('/home_page_admin')
- 
 def home_page_admin():
     return render_template(
         'index.html',
         title='Task Manager',
     )
+
+@app.route('/home_page_admin/delete_staffs')
+def delete_staffs():
+    staffs = Staff.query.all()
+    return render_template('staffs_list_for_delete.html', staffs = staffs)
+
+@app.route('/home_page_admin/delete_staffs/<int:staff_id>')
+def delete_staffs_by_id(staff_id):
+    staff = Staff.query.get_or_404(staff_id)
+    db.session.delete(staff)
+    try:
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        flash('The staff you trying to remove has some unfinished tasks, go check!!!')
+        return redirect('/home_page_admin')
+    return redirect(url_for('delete_staffs'))
+
+@app.route('/home_page_admin/update_staffs')
+def update_staffs():
+    staffs = Staff.query.all()
+    return render_template('staffs_list_for_update.html', staffs = staffs)
+
+@app.route('/home_page_admin/update_staffs/<int:staff_id>')
+def update_staffs_by_id(staff_id):
+    staff = Staff.query.get_or_404(staff_id)
+    return render_template('staffs_update.html', staff_id=staff_id, staff=staff)
+
+@app.route('/home_page_admin/update_staffs/<int:staff_id>/handle_update', methods = ["POST"])
+def handle_update(staff_id):
+    name = request.form['staffname']
+    email = request.form['email']
+    staff = Staff.query.get_or_404(staff_id)
+    if name:
+        staff.staffname = name
+        db.session.commit()
+        return 'Updated successfully'
+    elif email:
+        staff.email = email
+        db.session.commit()
+        return 'Updated successfully'
+    elif name and email:
+        staff.staffname = name
+        staff.email = email
+        db.session.commit()
+        return 'Updated successfully'
+    else:
+        return 'Nothing is changed!'
 
 @app.route('/home_page_admin/staffs')
 def staffs():
@@ -59,9 +106,9 @@ def handle_staffs_form():
     name = request.form['name']
     email = request.form['email']
     if Staff.query.filter_by(staffname = name).first():
-        return 'This staff is already in the list', 400
+        return 'This staff is already in the list'
     if Staff.query.filter_by(email = email).first():
-        return 'This email is used for the another staff', 400
+        return 'This email is used for the another staff'
     
     staff = Staff(staffname = name, email = email)
 
@@ -70,7 +117,7 @@ def handle_staffs_form():
         db.session.commit()
     except IntegrityError:
         db.session.rollback()
-        return 'This name or this email is already used', 404
+        return 'You missing some required information'
     return redirect(url_for('check'))
 
 @app.route('/handle_tasks_form', methods = ["POST"])
@@ -85,7 +132,7 @@ def handle_tasks_form():
         db.session.commit()
     except IntegrityError:
         db.session.rollback()
-        return 'You mising some required data'
+        return 'You mising some required information'
     return redirect(url_for('check'))
 
 @app.route('/delete_all_tasks')

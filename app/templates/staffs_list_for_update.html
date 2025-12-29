@@ -1,4 +1,4 @@
-<html>
+<html></html>
     <head>
         <title>Staff List</title>
     </head>
@@ -9,19 +9,12 @@
             {%for staff in staffs%}
             <p>
                 {{staff.id}} - {{staff.staffname}}  
+                <a href="/home_page_admin/update_staffs/{{staff.id}}">
+                <button type="button">Update</button>
+                </a>               
             </p>
             {%endfor%}
         </ul>
-        <br></br>
-
-        <a href="/home_page_admin">
-            <button type="button">Home Page</button>
-        </a>
         
-        <a href="/home_page_admin/staffs">
-            <button type="button">Add</button>
-        </a>
-
-
     </body>
 </html>

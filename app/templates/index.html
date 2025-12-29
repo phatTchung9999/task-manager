@@ -4,18 +4,35 @@
         <title>{{ title }}</title> 
     </head> 
     <body> 
+        {% set message = get_flashed_messages(with_categories=true) %}
+            {%if message%}
+            <p>{{ message }}</p>
+            {%endif%}
+
         <h1>What would you like to do today?</h1> 
-        <p>You would like to adjust the staff:
+        <p>You would like to adjust staff:
+        <a href="{{ url_for('update_staffs') }}">
+        <button type="button">Update</button>
+        </a>,
         <a href="{{ url_for('staffs') }}">
-        <button type="button">Staffs</button>
+        <button type="button">Add</button>
+        </a>, or 
+        <a href="{{ url_for('delete_staffs') }}">
+        <button type="button">Delete</button>
         </a>
         </p> 
-        <p>You would like to adjust the task:
+        <p>You would like to adjust task:
         <a href="{{ url_for('tasks') }}">
-        <button type="button">Tasks</button>
+        <button type="button">Update</button>
+        </a>, 
+        <a href="{{ url_for('tasks') }}">
+        <button type="button">Add</button>
+        </a>, or
+        <a href="{{ url_for('tasks') }}">
+        <button type="button">Delete</button>
         </a>
         </p>
-        <p>You would like to check the table of tasks:
+        <p>You would like to check table of tasks:
         <a href="{{ url_for('table') }}">
         <button type="button">Check</button>
         </a>

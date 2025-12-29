@@ -1,0 +1,33 @@
+<html></html>
+    <head>
+        <title>Staff Update</title>
+    </head>
+
+    <body>
+        <h1>Updating information for staff #{{staff_id}}:</h1>
+        <br></br>
+        <p>
+
+            <form method="post" action="/home_page_admin/update_staffs/{{staff_id}}/handle_update"> 
+                {{staff_id}} - 
+                <textarea
+                    id="staffname"
+                    name="staffname"
+                    rows="1"
+                    cols="20"
+                    placeholder="{{staff.staffname}}"
+                ></textarea>
+                -
+                <textarea
+                    id="email"
+                    name="email"
+                    rows="1"
+                    cols="20"
+                    placeholder="{{staff.email}}"
+                ></textarea>
+                <input type="submit" value="Submit"> 
+            </form>
+
+        </p>
+    </body>
+</html>
