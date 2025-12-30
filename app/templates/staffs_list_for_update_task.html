@@ -1,0 +1,20 @@
+<html></html>
+    <head>
+        <title>Staff List</title>
+    </head>
+
+    <body>
+        <h1>All staffs doing tasks listed here:</h1>
+        <ul>
+            {%for staff in staffs%}
+            <p>
+                {{staff.id}} - {{staff.staffname}}  
+                <a href="/home_page_admin/tasks/{{staff.id}}">
+                <button type="button">Update</button>
+                </a>               
+            </p>
+            {%endfor%}
+        </ul>
+        
+    </body>
+</html>
