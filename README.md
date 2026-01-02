@@ -1,4 +1,6 @@
-I am still working on these.
+I am currently pursuing a backend development certificate.  
+This project is a work in progress, and I plan to continue improving and expanding it as I strengthen my backend skills.
+
 However, you can still run it if you want to.
 
 
